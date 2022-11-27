@@ -22,39 +22,6 @@ class Arbol {
         return this.raiz;
     }
 
-   /* generarArbol(expresion) {
-        let vector = Array.from(expresion);
-        let aux = 0;
-        for (let i = 0; i < vector.length; i++) {
-            if (vector[i] == "+") {
-                aux = new Nodo(vector[i]);
-                aux.hijoIzq = new Nodo(vector[i - 2]);
-                aux.hijoDer = new Nodo(vector[i - 1]);
-                vector.splice(i - 2, 3, aux);
-                this.generarArbol(vector);
-            } else if (vector[i] == "-") {
-                aux = new Nodo(vector[i]);
-                aux.hijoIzq = new Nodo(vector[i - 2]);
-                aux.hijoDer = new Nodo(vector[i - 1]);
-                vector.splice(i - 2, 3, aux);
-                this.generarArbol(vector);
-            } else if (vector[i] == "*") {
-                aux = new Nodo(vector[i]);
-                aux.hijoIzq = new Nodo(vector[i - 2]);
-                aux.hijoDer = new Nodo(vector[i - 1]);
-                vector.splice(i - 2, 3, aux);
-                this.generarArbol(vector);
-            } else if (vector[i] == "/") {
-                aux = new Nodo(vector[i]);
-                aux.hijoIzq = new Nodo(vector[i - 2]);
-                aux.hijoDer = new Nodo(vector[i - 1]);
-                vector.splice(i - 2, 3, aux);
-                this.generarArbol(vector);
-            }
-        }
-        this.raiz = vector[0];
-    }*/
-
     crearArbol(expresion) {
         let vector = Array.from(expresion);
         let temp1 = [];
