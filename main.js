@@ -71,31 +71,6 @@ class Arbol {
         return vector;
     }
 
-    preOrder() {
-        let vector = [];
-        let aux = this._preOrder(this.raiz, vector);
-        let str = "";
-        for (let i = 0; i < aux.length; i++) {
-            str += aux[i];
-        }
-        return str;
-
-    }
-
-    _preOrder(nodo, vector) {
-        if (nodo != null) {
-            vector.push(nodo.dato);
-            this._preOrder(nodo.hijoIzq, vector);
-            this._preOrder(nodo.hijoDer, vector);
-        } return vector;
-
-
-
-
-    }
-
-
-
     resolverPreOrder(expresion) {
         let vector = [];
         if (typeof expresion === "string") {
@@ -157,6 +132,21 @@ class Arbol {
         return vector[0];
     }
 
+    preOrder() {
+        let vector = [];
+        let aux = this.raiz;
+        vector = this._preOrder(aux, vector);
+        return vector;
+    }
+
+    _preOrder(nodo, vector) {
+        if (nodo != null) {
+            vector.push(nodo.dato);
+            this._preOrder(nodo.hijoIzq, vector);
+            this._preOrder(nodo.hijoDer, vector);
+        }
+        return vector;
+    }
 
 
 
@@ -164,9 +154,9 @@ class Arbol {
 
 let arbol = new Arbol();
 //console.log(arbol.crearArbol("3*9-6*3/2+3*6+5*4/2"))
-arbol.crearArbol("1+2*3/2+3*6+5*4/2")
+arbol.crearArbol("3*9-6*3/2+3*6+5*4/2")
 console.log(arbol.getArbol());
-//console.log(arbol.preOrder());
+console.log(arbol.preOrder());
 
 
 
