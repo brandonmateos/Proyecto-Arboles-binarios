@@ -16,6 +16,7 @@ class Nodo {
 class Arbol {
     constructor() {
         this.raiz = null;
+        this.str = null;
     }
 
     getArbol() {
@@ -24,6 +25,11 @@ class Arbol {
 
     crearArbol(expresion) {
         let vector = Array.from(expresion);
+        for (let i = 0; i < vector.length; i++) {
+            if (vector[i] == '0' || vector[i] == '1' || vector[i] == '2' || vector[i] == '3' || vector[i] == '4' || vector[i] == '5' || vector[i] == '6' || vector[i] == '7' || vector[i] == '8' || vector[i] == '9') {
+                vector[i] = Number(vector[i]);
+            }
+        }
         let temp1 = [];
         let temp2 = [];
         let nodo = new Nodo();
@@ -46,6 +52,7 @@ class Arbol {
         aux.hijoDer = temp2[0];
 
     }
+    
     _crearArbol(vector) {
         let nodo = new Nodo();
         for (let i = 0; i < vector.length; i++) {
@@ -133,22 +140,92 @@ class Arbol {
     }
 
     preOrder() {
-        let vector = [];
-        let aux = this.raiz;
-        vector = this._preOrder(aux, vector);
-        return vector;
-    }
-
-    _preOrder(nodo, vector) {
-        if (nodo != null) {
-            vector.push(nodo.dato);
-            this._preOrder(nodo.hijoIzq, vector);
-            this._preOrder(nodo.hijoDer, vector);
+        this.str = "";
+        if (this.raiz == null) {
+            return false;
+        } else {
+            this._preOrder(this.raiz);
         }
-        return vector;
+        return this.str;
     }
 
+    _preOrder(nodox) {
+        if(nodox == 1){
+            this.str += "1";
+        }else if(nodox == 2){
+            this.str += "2";
+        }else if(nodox == 3){
+            this.str += "3";
+        }else if(nodox == 4){
+            this.str += "4";
+        }else if(nodox == 5){
+            this.str += "5";
+        }else if(nodox == 6){
+            this.str += "6";
+        }else if(nodox == 7){
+            this.str += "7";
+        }else if(nodox == 8){
+            this.str += "8";
+        }else if(nodox == 9){
+            this.str += "9";
+        }else if(nodox == 0){
+            this.str += "0";
+        }else{
+        this.str = this.str + `${nodox.dato}`;
+        }
+        if (nodox.hijoIzq != null) {
+            this._preOrder(nodox.hijoIzq);
+        }
+        if (nodox.hijoDer != null) {
+            this._preOrder(nodox.hijoDer);
+        }
 
+    }
+
+    posOrder() {
+        this.str = '';
+        if (this.raiz == null) {
+            return false;
+        } else {
+            this._posOrder(this.raiz);
+        }
+        return this.str;
+    }
+
+    _posOrder(nodox) {
+
+        if(nodox == 1){
+            this.str += "1";
+        }else if(nodox == 2){
+            this.str += "2";
+        }else if(nodox == 3){
+            this.str += "3";
+        }else if(nodox == 4){
+            this.str += "4";
+        }else if(nodox == 5){
+            this.str += "5";
+        }else if(nodox == 6){
+            this.str += "6";
+        }else if(nodox == 7){
+            this.str += "7";
+        }else if(nodox == 8){
+            this.str += "8";
+        }else if(nodox == 9){
+            this.str += "9";
+        }else if(nodox == 0){
+            this.str += "0";
+        }else{
+        this.str = this.str + `${nodox.dato}`;
+        }
+        if (nodox.hijoIzq != null) {
+            this._posOrder(nodox.hijoIzq);
+        }
+        if (nodox.hijoder != null) {
+            this._posOrder(nodox.hijoDer);
+        }
+        this.str += nodox.dato;
+
+    }
 
 }
 
@@ -156,11 +233,7 @@ let arbol = new Arbol();
 //console.log(arbol.crearArbol("3*9-6*3/2+3*6+5*4/2"))
 arbol.crearArbol("3*9-6*3/2+3*6+5*4/2")
 console.log(arbol.getArbol());
-console.log(arbol.preOrder());
-
-
-
-
+//console.log(arbol.preOrder());
 
 /*console.log(arbol.resolverPreOrder('++-+4*3269/*369'));
 console.log(arbol.resolverPreOrder('++-*39/*632*36/*542'));
@@ -182,6 +255,3 @@ console.log(arbol.resolverPosOrder('39*63*2/-36*+54*2/+'));
 //(13)(18)9/+
 //(13)(2)+
 //(15)*/
-
-
-
