@@ -22,10 +22,43 @@ class Arbol {
         return this.raiz;
     }
 
+   /* generarArbol(expresion) {
+        let vector = Array.from(expresion);
+        let aux = 0;
+        for (let i = 0; i < vector.length; i++) {
+            if (vector[i] == "+") {
+                aux = new Nodo(vector[i]);
+                aux.hijoIzq = new Nodo(vector[i - 2]);
+                aux.hijoDer = new Nodo(vector[i - 1]);
+                vector.splice(i - 2, 3, aux);
+                this.generarArbol(vector);
+            } else if (vector[i] == "-") {
+                aux = new Nodo(vector[i]);
+                aux.hijoIzq = new Nodo(vector[i - 2]);
+                aux.hijoDer = new Nodo(vector[i - 1]);
+                vector.splice(i - 2, 3, aux);
+                this.generarArbol(vector);
+            } else if (vector[i] == "*") {
+                aux = new Nodo(vector[i]);
+                aux.hijoIzq = new Nodo(vector[i - 2]);
+                aux.hijoDer = new Nodo(vector[i - 1]);
+                vector.splice(i - 2, 3, aux);
+                this.generarArbol(vector);
+            } else if (vector[i] == "/") {
+                aux = new Nodo(vector[i]);
+                aux.hijoIzq = new Nodo(vector[i - 2]);
+                aux.hijoDer = new Nodo(vector[i - 1]);
+                vector.splice(i - 2, 3, aux);
+                this.generarArbol(vector);
+            }
+        }
+        this.raiz = vector[0];
+    }*/
+
     crearArbol(expresion) {
         let vector = Array.from(expresion);
-        let temp1;
-        let temp2;
+        let temp1 = [];
+        let temp2 = [];
         let nodo = new Nodo();
         for (let i = vector.length; i >= 0; i--) {
             if (this.raiz === null) {
@@ -37,21 +70,19 @@ class Arbol {
                 }
             }
         }
+
         temp1 = this._crearArbol(temp1);
         temp2 = this._crearArbol(temp2);
 
-        this.raiz.hijoIzq = temp1[0];
-        this.raiz.hijoDer = temp2[0];
+        let aux = this.raiz;
+        aux.hijoIzq = temp1[0];
+        aux.hijoDer = temp2[0];
 
     }
-
-
     _crearArbol(vector) {
         let nodo = new Nodo();
-        let aux;
         for (let i = 0; i < vector.length; i++) {
             if (vector[i] == "*" || vector[i] == "/") {
-                aux = vector[i];
                 nodo.dato = vector[i];
                 nodo.hijoIzq = vector[i - 1];
                 nodo.hijoDer = vector[i + 1];
@@ -73,22 +104,29 @@ class Arbol {
         return vector;
     }
 
-    preOrder(){
+    preOrder() {
         let vector = [];
-        this._preOrder(this.raiz, vector);
-        return vector;
-        
+        let aux = this._preOrder(this.raiz, vector);
+        let str = "";
+        for (let i = 0; i < aux.length; i++) {
+            str += aux[i];
+        }
+        return str;
+
     }
 
-    _preOrder(nodo, vector){
-        if(nodo != null){
+    _preOrder(nodo, vector) {
+        if (nodo != null) {
             vector.push(nodo.dato);
             this._preOrder(nodo.hijoIzq, vector);
             this._preOrder(nodo.hijoDer, vector);
-        }else{
-            vector.push("null");
-        }
+        } return vector;
+
+
+
+
     }
+
 
 
     resolverPreOrder(expresion) {
@@ -159,9 +197,13 @@ class Arbol {
 
 let arbol = new Arbol();
 //console.log(arbol.crearArbol("3*9-6*3/2+3*6+5*4/2"))
-arbol.crearArbol("3*9-6*3/2+3*6+5*4/2")
+arbol.crearArbol("1+2*3/2+3*6+5*4/2")
 console.log(arbol.getArbol());
 //console.log(arbol.preOrder());
+
+
+
+
 
 /*console.log(arbol.resolverPreOrder('++-+4*3269/*369'));
 console.log(arbol.resolverPreOrder('++-*39/*632*36/*542'));
