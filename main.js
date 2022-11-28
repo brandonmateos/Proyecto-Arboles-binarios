@@ -1,10 +1,3 @@
-/*
-1-resivir una expresion
-2-trasformarla a arbol
-3-crear la preorder y el posorder
-4-resolover el preorder o posorder
-5-resivir los preorder o los posorder
-*/
 class Nodo {
     constructor(dato) {
         this.dato = dato;
@@ -20,7 +13,7 @@ class Arbol {
     }
 
     getArbol() {
-        return this.raiz;
+        return console.log(JSON.stringify(this.raiz, null, 2));
     }
 
     crearArbol(expresion) {
@@ -183,7 +176,7 @@ class Arbol {
     }
 
     posOrder() {
-        this.str = '';
+        this.str = "";
         if (this.raiz == null) {
             return false;
         } else {
@@ -193,7 +186,12 @@ class Arbol {
     }
 
     _posOrder(nodox) {
-
+        if (nodox.hijoIzq != null) {
+            this._posOrder(nodox.hijoIzq);
+        }
+        if (nodox.hijoDer != null) {
+            this._posOrder(nodox.hijoDer);
+        }
         if(nodox == 1){
             this.str += "1";
         }else if(nodox == 2){
@@ -217,25 +215,18 @@ class Arbol {
         }else{
         this.str = this.str + `${nodox.dato}`;
         }
-        if (nodox.hijoIzq != null) {
-            this._posOrder(nodox.hijoIzq);
-        }
-        if (nodox.hijoder != null) {
-            this._posOrder(nodox.hijoDer);
-        }
-        this.str += nodox.dato;
 
     }
 
 }
 
 let arbol = new Arbol();
-//console.log(arbol.crearArbol("3*9-6*3/2+3*6+5*4/2"))
 arbol.crearArbol("3*9-6*3/2+3*6+5*4/2")
-console.log(arbol.getArbol());
-//console.log(arbol.preOrder());
+arbol.getArbol();
+console.log("PreOrder: "+arbol.preOrder());
+console.log("PosOrder: "+arbol.posOrder());
 
-/*console.log(arbol.resolverPreOrder('++-+4*3269/*369'));
+console.log(arbol.resolverPreOrder('++-+4*3269/*369'));
 console.log(arbol.resolverPreOrder('++-*39/*632*36/*542'));
 //++-+4*3269/*369
 //++-+4*3269/189
@@ -254,4 +245,4 @@ console.log(arbol.resolverPosOrder('39*63*2/-36*+54*2/+'));
 //(13)36*9/+
 //(13)(18)9/+
 //(13)(2)+
-//(15)*/
+//(15)
